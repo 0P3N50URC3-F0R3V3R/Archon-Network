@@ -1,0 +1,262 @@
+@font-face {
+    font-family: C64ProRegular;
+    src: url(../../fonts/v2.0/c64_pro_v1.0-style-webfont-webfont.eot);
+    src: url(../../fonts/v2.0/c64_pro_v1.0-style-webfont-webfont.eot?#iefix) format('embedded-opentype'), url(../../fonts/v2.0/c64_pro_v1.0-style-webfont-webfont.woff) format('woff'), url(../../fonts/v2.0/c64_pro_v1.0-style-webfont-webfont.ttf) format('truetype');
+    font-weight: 400;
+    font-style: normal
+}
+body,
+html {
+    background: #000
+}
+#body,
+body {
+    position: relative
+}
+#screen,
+#visualFilterLayer {
+    position: absolute;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor
+}
+#border,
+#menuOverlay,
+#visualFilterLayer {
+    left: 0;
+    width: 100%;
+    top: 0;
+    height: 100%
+}
+#body,
+#border,
+#menu,
+#menuOverlay,
+body,
+html {
+    height: 100%
+}
+#menu>.l1,
+#menuToggler {
+    cursor: pointer;
+    box-sizing: border-box
+}
+#menu>.l1,
+#menuToggler,
+#social {
+    box-sizing: border-box
+}
+#menu>.l1,
+#onlineLink,
+#social,
+.social {
+    text-align: center
+}
+a,
+b,
+body,
+canvas,
+center,
+div,
+em,
+html,
+i,
+iframe,
+img,
+span,
+strong,
+u {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline
+}
+#onlineLink,
+body {
+    font-family: C64ProRegular;
+    text-transform: uppercase
+}
+@font-face {
+    font-family: C64ProRegular;
+    font-weight: 400;
+    font-style: normal
+}
+html {
+    overflow: hidden
+}
+body {
+    font-size: 16px;
+    line-height: 1;
+    color: #fff;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+#border {
+    position: absolute;
+    z-index: 80
+}
+a {
+    text-decoration: none
+}
+:focus {
+    outline: 0
+}
+.hide {
+    display: none!important
+}
+#body {
+    z-index: 50;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    width: auto;
+    transition: margin-left .2s linear 0s
+}
+#body.menu {
+    margin-left: 300px
+}
+#screen {
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 960px;
+    height: 600px;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges
+}
+#onlineLink {
+    position: absolute;
+    z-index: 110;
+    left: -7px;
+    top: 0;
+    width: 960px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    font-size: 24px;
+    line-height: 26px;
+    color: #fff;
+    letter-spacing: 3px;
+    background: 0 0
+}
+#menu>.l1,
+#menu>.l1 .items>div {
+    border-bottom: 1px solid #137;
+    color: #fff
+}
+#visualFilterLayer {
+    z-index: 120;
+    pointer-events: none;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges
+}
+#menuOverlay {
+    position: fixed;
+    z-index: 1000
+}
+#menuToggler {
+    position: fixed;
+    z-index: 1400;
+    top: 5px;
+    left: 5px;
+    width: 90px;
+    padding-left: 12px;
+    padding-top: 12px;
+    height: 38px;
+    background-color: #a00;
+    color: #fff;
+    overflow: hidden
+}
+#menuToggler.small {
+    width: 38px;
+    padding-left: 0;
+    background-color: #444
+}
+#menuToggler.small span {
+    display: none
+}
+#menuToggler:hover {
+    background-color: #b11
+}
+#menuToggler.small:hover {
+    background-color: #555
+}
+#menu {
+    position: fixed;
+    z-index: 1500;
+    top: 0;
+    left: -500px;
+    width: 320px;
+    max-width: 75%;
+    background: #555;
+    box-shadow: 20px 0 30px rgba(0, 0, 0, .6);
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: left .2s linear 0s
+}
+#menu.opened {
+    left: 0
+}
+#menu>.l1 {
+    padding: 15px 0 0;
+    background: #15c
+}
+#menu>.l1.startButton {
+    background: #a00
+}
+#menu>.l1:hover {
+    background: #27e
+}
+#menu>.l1.startButton:hover {
+    background: #b11
+}
+#menu>.l1.nosubmenu {
+    padding-bottom: 10px
+}
+#menu>.l1 .items {
+    margin-top: 10px;
+    border-top: 1px solid #137;
+    transition: height .2s linear 0s;
+    overflow: hidden;
+    background: #249
+}
+#menu>.l1 .items.closed {
+    height: 0!important;
+    border-top: none
+}
+#menu>.l1 .items>div {
+    padding: 5px
+}
+#menu>.l1 .items>div:hover {
+    background: #46a
+}
+#menu>.l1 .items>div.active {
+    background: #ff0;
+    color: #137
+}
+#social {
+    padding-top: 20px;
+    height: 70px;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333
+}
+.social {
+    padding: 5px 0;
+    border-bottom: 1px solid #555;
+    background: #666
+}
+.social:last-child {
+    border-bottom: 1px solid #333
+}
+#donate {
+    padding: 15px 0
+}
