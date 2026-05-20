@@ -1,1 +1,2 @@
-node server.js
+@echo off
+"%~dp0node.exe" "%~dp0server.js"
