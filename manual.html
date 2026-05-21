@@ -7,39 +7,54 @@
     <style>
         @font-face{font-family:C64;src:url('fonts/v2.0/C64_Pro-STYLE.woff2') format('woff2');}
         *{margin:0;padding:0;box-sizing:border-box;}
-        body{background:#000050;color:#d0d0ff;font-family:C64,monospace;font-size:13px;line-height:1.8;padding:20px;}
-        #wrap{max-width:800px;margin:0 auto;border:4px solid #3333aa;background:#000030;padding:32px 40px;}
-        h1{color:#fff;font-size:28px;letter-spacing:8px;text-align:center;margin-bottom:4px;}
-        .sub{color:#aaaaff;text-align:center;letter-spacing:3px;font-size:11px;margin-bottom:30px;}
+        body{background:#000050;color:#d0d0ff;font-family:C64,monospace;font-size:13px;line-height:1.9;padding:20px;}
+        #wrap{max-width:820px;margin:0 auto;border:4px solid #3333aa;background:#000030;padding:32px 40px;}
+        h1{color:#fff;font-size:26px;letter-spacing:8px;text-align:center;margin-bottom:4px;}
+        .sub{color:#aaaaff;text-align:center;letter-spacing:3px;font-size:11px;margin-bottom:28px;}
         h2{color:#ffff55;font-size:14px;letter-spacing:4px;border-bottom:1px solid #333388;
-           padding-bottom:6px;margin:28px 0 14px;}
+           padding-bottom:5px;margin:28px 0 12px;}
         h3{color:#55ffff;font-size:12px;letter-spacing:2px;margin:16px 0 6px;}
         p{margin-bottom:10px;color:#bbbbdd;}
-        .light{color:#ffffff;}
-        .dark{color:#aaaaff;}
-        .yellow{color:#ffff55;}
-        .cyan{color:#55ffff;}
-        table{width:100%;border-collapse:collapse;margin:12px 0;}
-        th{background:#000080;color:#ffff55;padding:7px 10px;text-align:left;font-size:11px;letter-spacing:2px;}
-        td{padding:6px 10px;border-bottom:1px solid #111144;font-size:12px;color:#ccccee;}
-        tr:hover td{background:#000060;}
-        .tag{display:inline-block;padding:1px 6px;font-size:10px;border:1px solid;margin:0 2px;}
-        .fly{border-color:#55ffff;color:#55ffff;}
-        .gnd{border-color:#88aa88;color:#88aa88;}
-        .rng{border-color:#ffaa55;color:#ffaa55;}
-        .mel{border-color:#ff7777;color:#ff7777;}
-        .mage-tag{border-color:#ff55ff;color:#ff55ff;}
-        .hp-bar{display:inline-block;background:#003300;width:80px;height:8px;vertical-align:middle;}
-        .hp-fill{height:100%;background:#00aa00;}
-        ul{margin:6px 0 10px 20px;color:#bbbbdd;}
+        ul{margin:6px 0 12px 20px;color:#bbbbdd;}
         li{margin-bottom:4px;}
+        table{width:100%;border-collapse:collapse;margin:10px 0 16px;}
+        th{background:#000080;color:#ffff55;padding:7px 10px;text-align:left;font-size:11px;letter-spacing:2px;}
+        td{padding:6px 10px;border-bottom:1px solid #111144;font-size:12px;color:#ccccee;vertical-align:top;}
+        tr:hover td{background:#000060;}
+        .pn-l{color:#ffffff;font-weight:bold;}
+        .pn-d{color:#aaaaff;font-weight:bold;}
+        .tag{display:inline-block;padding:1px 5px;font-size:10px;border:1px solid;margin:0 1px;letter-spacing:1px;}
+        .fly {border-color:#55ffff;color:#55ffff;}
+        .gnd {border-color:#88aa88;color:#88aa88;}
+        .rng {border-color:#ffaa55;color:#ffaa55;}
+        .mel {border-color:#ff7777;color:#ff7777;}
+        .mage{border-color:#ff55ff;color:#ff55ff;}
+        .scr {border-color:#ff88ff;color:#ff88ff;}
+        .fire{border-color:#ff6600;color:#ff6600;}
         .kbd{display:inline-block;background:#222;border:1px solid #555;padding:1px 6px;color:#fff;font-size:11px;}
-        .spell-idx{color:#ffff55;min-width:22px;display:inline-block;}
-        .note{background:#000060;border-left:3px solid #3333aa;padding:10px 14px;margin:12px 0;color:#aaaadd;}
-        .back{display:block;text-align:center;margin-top:24px;color:#5555ff;text-decoration:none;letter-spacing:2px;font-size:11px;}
-        .back:hover{color:#aaaaff;}
-        .piece-name-l{color:#ffffff;font-weight:bold;}
-        .piece-name-d{color:#aaaaff;font-weight:bold;}
+        .note{background:#000060;border-left:3px solid #3355aa;padding:10px 14px;margin:10px 0;color:#aaaadd;}
+        .warn{background:#200000;border-left:3px solid #aa3333;padding:10px 14px;margin:10px 0;color:#ddaaaa;}
+        .piece-block{background:#000040;border:1px solid #222266;padding:12px 16px;margin:10px 0;}
+        .piece-head{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+        .piece-title-l{color:#fff;font-size:14px;letter-spacing:3px;}
+        .piece-title-d{color:#aaaaff;font-size:14px;letter-spacing:3px;}
+        .piece-pos{color:#555577;font-size:11px;}
+        .piece-desc{color:#bbbbdd;font-size:12px;margin:6px 0;}
+        .stat-row{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0;font-size:11px;}
+        .stat{color:#aaaacc;}
+        .stat b{color:#ffff55;}
+        .str{color:#55ff55;font-size:11px;}
+        .wk {color:#ff7777;font-size:11px;}
+        .cnt{color:#ffaa55;font-size:11px;}
+        .cycle-table td:first-child{color:#ffff55;text-align:center;font-size:12px;}
+        .cy-light{color:#ddddff;}
+        .cy-dark {color:#8888ff;}
+        .cy-start{color:#ffff55;}
+        .back{display:block;text-align:center;margin-top:28px;color:#5555ff;text-decoration:none;
+              letter-spacing:2px;font-size:11px;border:1px solid #333388;padding:12px;}
+        .back:hover{color:#aaaaff;background:#000060;}
+        hr{border:none;border-top:1px solid #111155;margin:24px 0;}
+        .col2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
     </style>
 </head>
 <body>
@@ -48,230 +63,502 @@
 <h1>ARCHON</h1>
 <div class="sub">THE LIGHT AND THE DARK — PLAYER MANUAL</div>
 
-<!-- ══ HOW TO WIN ══════════════════════════════════════════════════════════ -->
+<!-- ══ WIN CONDITION ══════════════════════════════════════════════════════ -->
 <h2>HOW TO WIN</h2>
-<p>Capture all <span class="yellow">5 Power Points</span> simultaneously — or destroy every enemy piece.</p>
-<p>Power Points are the glowing squares at the center and four cardinal positions of the board. Holding all five at the start of your turn wins the game instantly.</p>
+<p>There are two victory conditions:</p>
+<ul>
+    <li><b>Domination</b> — Occupy all <b>5 Power Points</b> simultaneously at the start of your turn</li>
+    <li><b>Annihilation</b> — Destroy every enemy piece</li>
+</ul>
+<div class="note">You can also lose if all your pieces are imprisoned or dead with no way to free them.</div>
 
-<!-- ══ THE BOARD ═══════════════════════════════════════════════════════════ -->
+<!-- ══ THE BOARD ══════════════════════════════════════════════════════════ -->
 <h2>THE BOARD</h2>
-<p>The board is 9×9. Squares are either <span class="light">Light</span>, <span class="dark">Dark</span>, or <span class="yellow">Charmed</span> (the center cross pattern). Pieces cannot share a square — moving onto an enemy triggers <span class="cyan">combat</span>.</p>
-
-<h3>Power Points</h3>
+<p>The board is <b>9×9</b>. Every square is one of three types:</p>
 <ul>
-    <li>Center (4,4), Top (4,0), Bottom (4,8), Left (0,4), Right (8,4)</li>
-    <li>Pieces on power points <span class="yellow">cannot be targeted by most spells</span></li>
-    <li>Combat on a power point grants an HP bonus to the defender</li>
-    <li>Holding a power point heals the piece there at the start of each cycle</li>
+    <li><span style="color:#fff">■ Light squares</span> — give +7 HP to Light pieces in combat</li>
+    <li><span style="color:#5555ff">■ Dark squares</span> — give +7 HP to Dark pieces in combat</li>
+    <li><span style="color:#ffff55">■ Charmed squares</span> — HP bonus shifts with the Light Cycle (see below)</li>
 </ul>
+<p>The <b>5 Power Points</b> are charmed squares at key positions: center (4,4), plus one on each edge (4,0), (4,8), (0,4), (8,4).</p>
+<p>Pieces on power points <b>cannot be targeted by spells</b>, receive a healing tick each cycle round, and get the charmed-square HP bonus in combat.</p>
 
-<!-- ══ THE LIGHT CYCLE ════════════════════════════════════════════════════ -->
+<!-- ══ LIGHT CYCLE ════════════════════════════════════════════════════════ -->
 <h2>THE LIGHT CYCLE</h2>
-<p>The Light Cycle rotates through 6 phases (0–5) and shifts by one each full round. It determines which <span class="yellow">charmed squares</span> favor which side:</p>
-<ul>
-    <li><span class="light">Phase 3</span> — neutral (game start default for light-first)</li>
-    <li><span class="light">Phases 4–5</span> — charmed squares favour <span class="light">Light</span></li>
-    <li><span class="dark">Phases 0–2</span> — charmed squares favour <span class="dark">Dark</span></li>
-</ul>
-<p>At phase 0 or 5 the imprisoned pieces of the favoured side are freed and healed.</p>
+<p>The Light Cycle is a counter (0–5) that shifts by 1 each complete round. It determines how strong each side is on charmed squares and at the extremes (0 or 5) it frees imprisoned pieces.</p>
 
-<!-- ══ PIECE MOVEMENT ══════════════════════════════════════════════════════ -->
-<h2>MOVEMENT RULES</h2>
-<ul>
-    <li><span class="tag gnd">GROUND</span> pieces move in cardinal directions only, one step at a time</li>
-    <li><span class="tag fly">FLY</span> pieces move freely in any direction within their step limit</li>
-    <li><span class="tag mage-tag">MAGE</span> pieces (Wizard / Sorceress) teleport anywhere within range</li>
-    <li>You cannot pass through or land on your own pieces</li>
-    <li>Landing on an enemy square triggers combat (you choose whether to challenge)</li>
-</ul>
-
-<!-- ══ LIGHT PIECES ═══════════════════════════════════════════════════════ -->
-<h2>LIGHT SIDE PIECES</h2>
-<table>
-    <tr><th>Piece</th><th>Type</th><th>HP</th><th>Steps</th><th>DMG</th><th>Description</th></tr>
-    <tr>
-        <td class="piece-name-l">Wizard</td>
-        <td><span class="tag mage-tag">MAGE</span><span class="tag fly">FLY</span></td>
-        <td>10</td><td>3</td><td>10</td>
-        <td>Can cast all 8 spells. Teleports in combat. Avoid losing him — spells are lost forever.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Phoenix</td>
-        <td><span class="tag fly">FLY</span><span class="tag rng">FIRE</span></td>
-        <td>12</td><td>5</td><td>2</td>
-        <td>Fast mover with a wide fire aura. Low per-hit damage but huge hitbox — hard to dodge. Slow fire rate.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Djinni</td>
-        <td><span class="tag fly">FLY</span><span class="tag rng">RANGED</span></td>
-        <td>15</td><td>4</td><td>6</td>
-        <td>Tanky flying ranged attacker. High HP, slow fire rate. Good for holding power points.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Unicorn</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>9</td><td>4</td><td>7</td>
-        <td>Fast energy beam. High projectile speed makes it hard to dodge. Light's best ground attacker.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Golem</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>15</td><td>3</td><td>10</td>
-        <td>Slow but extremely tough. High damage. Difficult to kill. Use to hold contested squares.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Valkyrie</td>
-        <td><span class="tag fly">FLY</span><span class="tag rng">RANGED</span></td>
-        <td>8</td><td>3</td><td>7</td>
-        <td>Flying ranged fighter. Can reach any corner quickly. Good flanker.</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Archer</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>5</td><td>3</td><td>5</td>
-        <td>Basic ranged infantry. Fragile but shoots reliably. 2 per army (rows 0 and 8).</td>
-    </tr>
-    <tr>
-        <td class="piece-name-l">Knight</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag mel">MELEE</span></td>
-        <td>5</td><td>3</td><td>5</td>
-        <td>Melee infantry. Must physically touch the enemy to deal damage. Very fast attack rate — lethal up close. 7 per army.</td>
-    </tr>
+<table class="cycle-table">
+    <tr><th>Phase</th><th>Light HP bonus<br>(charmed sq.)</th><th>Dark HP bonus<br>(charmed sq.)</th><th>Event</th></tr>
+    <tr><td>0</td><td class="cy-light">+7</td><td class="cy-dark">0</td><td style="color:#55ff55">Light imprisoned pieces freed &amp; healed</td></tr>
+    <tr><td>1</td><td class="cy-light">+6</td><td class="cy-dark">+1</td><td></td></tr>
+    <tr><td>2</td><td class="cy-light">+4</td><td class="cy-dark">+3</td><td></td></tr>
+    <tr><td class="cy-start">3 ★</td><td class="cy-light">+3</td><td class="cy-dark">+4</td><td style="color:#ffff55">Start position (Light first)</td></tr>
+    <tr><td>4</td><td class="cy-light">+1</td><td class="cy-dark">+6</td><td></td></tr>
+    <tr><td>5</td><td class="cy-light">0</td><td class="cy-dark">+7</td><td style="color:#8888ff">Dark imprisoned pieces freed &amp; healed</td></tr>
 </table>
+<div class="note">The cycle reverses direction when it reaches 0 or 5. <b>Shift Time</b> spell reverses direction early — very powerful when the cycle is heading toward the enemy's extreme.</div>
+
+<!-- ══ MOVEMENT ══════════════════════════════════════════════════════════ -->
+<h2>MOVEMENT</h2>
+<table>
+    <tr><th>Type</th><th>Movement</th><th>Who</th></tr>
+    <tr><td><span class="tag gnd">GROUND</span></td><td>Cardinal directions only (up/down/left/right), one cell at a time, animated</td><td>Knight, Goblin, Archer, Manticore, Golem, Troll, Unicorn, Basilisk</td></tr>
+    <tr><td><span class="tag fly">FLY</span></td><td>Any direction including diagonals, animated movement</td><td>Valkyrie, Banshee, Djinni, Phoenix, Dragon, Shapeshifter</td></tr>
+    <tr><td><span class="tag mage">TELEPORT</span></td><td>Instant placement anywhere within range (no animation path)</td><td>Wizard, Sorceress</td></tr>
+</table>
+<ul>
+    <li>Cannot pass through or land on own pieces</li>
+    <li>Landing on an enemy square initiates combat</li>
+    <li>After selecting a piece, use direction keys to move it; press Enter/Shift to confirm position</li>
+    <li>Mages: fire on empty/enemy square to teleport there; fire on own mage to open spell browser</li>
+</ul>
+
+<!-- ══ COMBAT ════════════════════════════════════════════════════════════ -->
+<h2>COMBAT</h2>
+<h3>How Combat HP Works</h3>
+<p>When combat begins, each piece's HP is calculated:</p>
+<pre style="background:#000060;padding:10px;color:#ffff55;font-size:12px;margin:8px 0;">
+  combat HP = baseHP − injuries + square bonus
+</pre>
+<ul>
+    <li><b>baseHP</b> — the piece's maximum health (see piece tables)</li>
+    <li><b>injuries</b> — damage accumulated from previous combats (permanent until healed)</li>
+    <li><b>square bonus</b> — +7 for coloured squares matching your side; charmed squares use the cycle table above</li>
+</ul>
+<p>After combat, <b>injuries increase</b> by the damage taken (minus any square bonus). A piece that fights repeatedly gets weaker each time unless healed.</p>
+
+<h3>Combat Arena</h3>
+<ul>
+    <li>Both pieces enter a small real-time arena with <b>18 barriers</b> (rocks)</li>
+    <li>Barriers oscillate between solid and transparent — at phase 6 projectiles slow on contact; at phase 7 barriers vanish completely</li>
+    <li>Each barrier is one of 3 types (different appearance and timing)</li>
+    <li>The arena border color matches the square type: white=light, dark blue=dark, coloured=charmed</li>
+</ul>
+
+<h3>Outcome</h3>
+<ul>
+    <li>First piece to reach 0 HP dies and is removed</li>
+    <li>If both reach 0 simultaneously, both die</li>
+    <li>Winner occupies the contested square</li>
+    <li>Elementals always die after combat regardless of outcome</li>
+</ul>
+<div class="warn">A piece that survives many combats with no healing becomes very fragile. Watch the HP bars on the left and right edges of the screen during combat.</div>
+
+<hr>
+
+<!-- ══ LIGHT PIECES ══════════════════════════════════════════════════════ -->
+<h2>LIGHT SIDE PIECES</h2>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">WIZARD</span>
+        <span class="tag mage">MAGE</span><span class="tag fly">TELEPORT</span>
+        <span class="piece-pos">×1 — col 0, row 4 (centre-left)</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>10</b></span>
+        <span class="stat">DMG <b>10</b></span>
+        <span class="stat">Shot speed <b>10</b></span>
+        <span class="stat">Attack rate <b>1.56s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Wizard fires a ranged bolt and can teleport anywhere within 3 squares. His greatest value is the <b>8 one-use spells</b>. Losing him permanently removes all spell capability — protect him at all costs. Medium combat stats mean he can hold his own but should not be sent into suicidal fights.</p>
+    <div class="str">✦ Strongest strategic asset. Keep on a power point for protection from spells + healing.</div>
+    <div class="wk">✖ If he dies, no more spells for the rest of the game.</div>
+    <div class="cnt">⚡ Counter: Imprison him before attacking. Forces opponent to fight without spells.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">PHOENIX</span>
+        <span class="tag fly">FLY</span><span class="tag fire">FIRE AURA</span>
+        <span class="piece-pos">×1 — col 0, row 5</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>12</b></span>
+        <span class="stat">DMG <b>2</b> per hit</span>
+        <span class="stat">Attack rate <b>1.98s</b></span>
+        <span class="stat">Steps <b>5</b></span>
+    </div>
+    <p class="piece-desc">The Phoenix projects a <b>fire aura</b> that grows outward in three phases (20×17 → 24×21 → 48×42 pixels). At full size it is nearly impossible to avoid. Low single-hit damage (2) but can hit the same enemy multiple times per cast on larger phases. Excellent movement range (5 steps).</p>
+    <div class="str">✦ Devastating at close range due to large fire coverage. Fast flier — hard to escape.</div>
+    <div class="wk">✖ Slow attack rate (almost 2 seconds between fires). Fragile vs sustained ranged fire.</div>
+    <div class="cnt">⚡ Counter: Keep distance. Fast ranged pieces (Unicorn, Basilisk) can outrun and outlast.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">DJINNI</span>
+        <span class="tag fly">FLY</span><span class="tag rng">RANGED</span>
+        <span class="piece-pos">×1 — col 0, row 3</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>15</b></span>
+        <span class="stat">DMG <b>6</b></span>
+        <span class="stat">Shot speed <b>10</b></span>
+        <span class="stat">Attack rate <b>1.78s</b></span>
+        <span class="stat">Steps <b>4</b></span>
+    </div>
+    <p class="piece-desc">The highest HP of all flying ranged pieces. The Djinni is a flying tank — it can absorb more punishment than almost any piece. Moderate damage and decent shot speed make it reliable. Ideal for guarding a power point; difficult to dislodge with a single piece.</p>
+    <div class="str">✦ Excellent power point holder. High HP survives many injuries before becoming fragile.</div>
+    <div class="wk">✖ Relatively slow fire rate. Not a fast killer.</div>
+    <div class="cnt">⚡ Counter: Dragon or Shapeshifter (if it copies Golem/Dragon for HP advantage).</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">UNICORN</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">ENERGY BEAM</span>
+        <span class="piece-pos">×2 — col 0, rows 2 and 6</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>9</b></span>
+        <span class="stat">DMG <b>7</b></span>
+        <span class="stat">Shot speed <b>14</b> ★ fastest</span>
+        <span class="stat">Attack rate <b>1.18s</b></span>
+        <span class="stat">Steps <b>4</b></span>
+    </div>
+    <p class="piece-desc">The Unicorn fires a <b>straight energy beam from its horn</b> at the highest projectile speed in the game (14). The beam is extremely hard to dodge. Good movement range for a ground piece (4 steps). With two per army and a fast fire rate, Unicorns are Light's best aggressive ground attackers.</p>
+    <div class="str">✦ Fastest projectile — nearly undodgeable. Good range, solid damage. Two per army.</div>
+    <div class="wk">✖ Medium HP means it cannot take many hits. Ground only — limited mobility.</div>
+    <div class="cnt">⚡ Counter: Flying piece that can circle and fire from off-axis angles. Banshee scream.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">GOLEM</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">ROCK (animated)</span>
+        <span class="piece-pos">×2 — col 0, rows 1 and 7</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>15</b></span>
+        <span class="stat">DMG <b>10</b></span>
+        <span class="stat">Shot speed <b>6</b></span>
+        <span class="stat">Attack rate <b>1.94s</b></span>
+        <span class="stat">Speed <b>75</b> ★ slow</span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Golem <b>hurls animated rocks</b> at enemies. Highest HP of all ground pieces (15) and high damage (10). The price is movement speed — at 75 it is the slowest piece in the game (others are 100). Practically impossible to kill in a straight fight, but easy to avoid by faster pieces. Place it on a power point and leave it there.</p>
+    <div class="str">✦ Incredible staying power. Very hard to kill head-on. Rocks deal heavy damage.</div>
+    <div class="wk">✖ Very slow movement. Can be kited indefinitely by any flying piece.</div>
+    <div class="cnt">⚡ Counter: Any flier that strafe-fires from range. Banshee, Shapeshifter (copies Golem stats), Dragon.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">VALKYRIE</span>
+        <span class="tag fly">FLY</span><span class="tag rng">RANGED</span>
+        <span class="piece-pos">×2 — col 0, rows 0 and 8</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>8</b></span>
+        <span class="stat">DMG <b>7</b></span>
+        <span class="stat">Shot speed <b>6</b></span>
+        <span class="stat">Attack rate <b>1.56s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">Flying ranged fighter starting at the corners. A reliable mobile unit that can reach any part of the board quickly. Medium stats across the board — not exceptional at anything but capable everywhere.</p>
+    <div class="str">✦ Two per army, flies, decent damage. Good for flanking and surprise attacks.</div>
+    <div class="wk">✖ Below average HP. Loses decisively against Dragon, Troll, or Golem.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">ARCHER</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span>
+        <span class="piece-pos">×2 — col 1, rows 0 and 8</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>5</b></span>
+        <span class="stat">DMG <b>5</b></span>
+        <span class="stat">Shot speed <b>8</b></span>
+        <span class="stat">Attack rate <b>1.56s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">Basic ranged infantry at the flanks. Low HP makes them fragile but they fire reliably. Best used to support heavier pieces or hold uncontested squares. Never send an Archer alone against a Troll or Dragon.</p>
+    <div class="str">✦ Reliable ranged fire. Two per army at good starting positions.</div>
+    <div class="wk">✖ Low HP — dies to almost everything in a sustained fight.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-l">KNIGHT</span>
+        <span class="tag gnd">GROUND</span><span class="tag mel">MELEE</span>
+        <span class="piece-pos">×7 — col 1, rows 1–7</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>5</b></span>
+        <span class="stat">DMG <b>5</b></span>
+        <span class="stat">Attack rate <b>0.76s</b> ★ fastest</span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Knight fights with a sword in pure <b>melee contact</b> — no projectile is fired. Damage is dealt only when the sprite physically overlaps the enemy. The attack rate of 0.76 seconds is the <b>fastest in the game</b>, meaning at close range a Knight deals hits extremely rapidly. With <b>7 per army</b> they are the backbone of the Light force.</p>
+    <div class="str">✦ Seven per army. Fastest attack rate. Expendable — use them to probe, block, and swarm weak enemies.</div>
+    <div class="wk">✖ Low HP, no ranged attack. Any ranged piece destroys them safely from distance.</div>
+    <div class="cnt">⚡ Counter: Any ranged piece. Keep distance. Never fight a Knight in close range unless you have very high HP.</div>
+</div>
+
+<hr>
 
 <!-- ══ DARK PIECES ════════════════════════════════════════════════════════ -->
 <h2>DARK SIDE PIECES</h2>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">SORCERESS</span>
+        <span class="tag mage">MAGE</span><span class="tag fly">TELEPORT</span>
+        <span class="piece-pos">×1 — col 8, row 4 (centre-right)</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>10</b></span>
+        <span class="stat">DMG <b>8</b></span>
+        <span class="stat">Shot speed <b>12</b></span>
+        <span class="stat">Attack rate <b>1.56s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">Dark mirror of the Wizard. She has the same role and spell pool but slightly different combat stats — lower damage (8) yet faster projectile (12 vs 10). The rules for protecting her are identical: lose the Sorceress and Dark loses all remaining spells.</p>
+    <div class="str">✦ Fast spell-class shots. Same strategic value as the Wizard.</div>
+    <div class="wk">✖ Losing her = no spells for the rest of the game.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">DRAGON</span>
+        <span class="tag fly">FLY</span><span class="tag rng">FIRE BREATH</span>
+        <span class="piece-pos">×1 — col 8, row 5</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>17</b> ★ highest</span>
+        <span class="stat">DMG <b>11</b> ★ highest</span>
+        <span class="stat">Shot speed <b>8</b></span>
+        <span class="stat">Attack rate <b>2.38s</b></span>
+        <span class="stat">Steps <b>4</b></span>
+    </div>
+    <p class="piece-desc">The Dragon has the <b>highest HP and the highest damage</b> of any piece. It shoots a directional fire-breath with a wide projectile. Its only meaningful weakness is the slowest attack rate in the game (2.38 seconds). Fast pieces can strafe between shots — but few pieces can survive even two direct hits.</p>
+    <div class="str">✦ Supremely powerful in head-on combat. Flies, so it can reach any square.</div>
+    <div class="wk">✖ Slow fire rate — can be kited. Most valuable piece: losing it is devastating.</div>
+    <div class="cnt">⚡ Counter: Shapeshifter (copies Dragon stats), Djinni (high HP, strafe between shots), Wizard Imprison spell.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">SHAPESHIFTER</span>
+        <span class="tag fly">FLY</span>
+        <span class="piece-pos">×1 — col 8, row 3</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>copies opponent</b></span>
+        <span class="stat">DMG <b>copies opponent</b></span>
+        <span class="stat">Steps <b>5</b></span>
+    </div>
+    <p class="piece-desc">At the moment combat begins, the Shapeshifter <b>copies every stat</b> (HP, DMG, shotSpeed, attackRate, speed, attack style) from the enemy piece. It fights as an exact clone — including all visual effects. Its starting injuries are reset to 0. On the board it is just a slow-looking piece, but send it against the Dragon and it <i>becomes</i> the Dragon.</p>
+    <div class="str">✦ Auto-scales to any opponent. Best deployed against the strongest enemy pieces. 5-step mobility.</div>
+    <div class="wk">✖ Against weak pieces (Knight, Goblin) it becomes equally weak. Mages: copies their combat stats but NOT their spells.</div>
+    <div class="cnt">⚡ Counter: Send it against weak pieces. Exchange spell can remove it from a dangerous position.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">BASILISK</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">ENERGY BEAM</span>
+        <span class="piece-pos">×2 — col 8, rows 2 and 6</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>6</b></span>
+        <span class="stat">DMG <b>9</b></span>
+        <span class="stat">Shot speed <b>14</b> ★ fastest</span>
+        <span class="stat">Attack rate <b>1.18s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Basilisk fires an energy beam from its eyes at the same blistering speed as the Unicorn (14). The beam is nearly undodgeable. It hits harder per shot than the Unicorn (9 vs 7) but has significantly lower HP (6 vs 9). Two per army.</p>
+    <div class="str">✦ Fastest projectile. Very high damage per hit for a ground piece. Excellent offensive value.</div>
+    <div class="wk">✖ Very low HP — dies quickly if caught. Any sustained fight will kill it.</div>
+    <div class="cnt">⚡ Counter: Flying pieces that can dodge along the perpendicular axis. High-HP pieces (Djinni, Golem) that can absorb beam hits.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">TROLL</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">ROCK (animated)</span>
+        <span class="piece-pos">×2 — col 8, rows 1 and 7</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>14</b></span>
+        <span class="stat">DMG <b>10</b></span>
+        <span class="stat">Shot speed <b>6</b></span>
+        <span class="stat">Attack rate <b>1.94s</b></span>
+        <span class="stat">Speed <b>75</b> ★ slow</span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">Nearly identical to the Golem. The Troll also <b>throws animated rocks</b>. 1 less HP than the Golem (14 vs 15) but otherwise the same role: park it on a power point and watch it outlast almost everything sent against it. Slow (75) so it is easily avoided by fliers.</p>
+    <div class="str">✦ High HP, high damage, excellent anchor for power points.</div>
+    <div class="wk">✖ Very slow. Kited easily by any flying piece.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">BANSHEE</span>
+        <span class="tag fly">FLY</span><span class="tag scr">SCREAM</span>
+        <span class="piece-pos">×2 — col 8, rows 0 and 8</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>8</b></span>
+        <span class="stat">DMG <b>1</b> per frame</span>
+        <span class="stat">Attack rate <b>1.96s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Banshee emits a <b>large-area scream</b> (48×42 pixel sprite) that follows the Banshee itself. The scream deals only 1 damage per hit but hits at multiple animation frames, and the enormous area makes it nearly impossible to avoid at close range. The effect is strongest in tight spaces or against slow pieces.</p>
+    <div class="str">✦ Area denial. Devastating at close range against slow enemies. Hard to dodge the scream entirely.</div>
+    <div class="wk">✖ Low single-hit damage. Fragile (8 HP). Against fast ranged pieces that maintain distance, it cannot land enough hits.</div>
+    <div class="cnt">⚡ Counter: Fast ranged piece (Unicorn, Basilisk) that stays at maximum distance and fires.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">MANTICORE</span>
+        <span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span>
+        <span class="piece-pos">×2 — col 7, rows 0 and 8</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>8</b></span>
+        <span class="stat">DMG <b>4</b></span>
+        <span class="stat">Shot speed <b>6</b></span>
+        <span class="stat">Attack rate <b>1.56s</b></span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">Ground-based ranged unit at Dark's flanks. More durable than the Archer (8 vs 5 HP) but deals less damage (4 vs 5). Can absorb a few more hits, but low damage means it needs sustained fire to be effective.</p>
+    <div class="str">✦ More durable than Archer. Good for holding secondary squares.</div>
+    <div class="wk">✖ Lowest damage of any ranged piece. No flight.</div>
+</div>
+
+<div class="piece-block">
+    <div class="piece-head">
+        <span class="piece-title-d">GOBLIN</span>
+        <span class="tag gnd">GROUND</span><span class="tag mel">MELEE</span>
+        <span class="piece-pos">×7 — col 7, rows 1–7</span>
+    </div>
+    <div class="stat-row">
+        <span class="stat">HP <b>5</b></span>
+        <span class="stat">DMG <b>5</b></span>
+        <span class="stat">Attack rate <b>0.76s</b> ★ fastest</span>
+        <span class="stat">Steps <b>3</b></span>
+    </div>
+    <p class="piece-desc">The Goblin fights with a <b>club in close combat</b> — pure melee, identical stats to the Knight. No projectile; must physically contact the enemy. The fastest attack rate in the game (0.76s) makes it devastating up close. With 7 per army they form Dark's frontline horde.</p>
+    <div class="str">✦ Seven per army. Lethal in melee packs. Fastest attack rate in the game.</div>
+    <div class="wk">✖ No ranged attack. Any ranged piece wins safely by keeping distance.</div>
+    <div class="cnt">⚡ Counter: Identical to Knight counter — any ranged piece, keep distance.</div>
+</div>
+
+<hr>
+
+<!-- ══ ELEMENTALS ════════════════════════════════════════════════════════ -->
+<h2>ELEMENTALS</h2>
+<p>Summoned by the <b>Summon Elemental</b> spell. The type is chosen randomly by the game. After the elemental appears, you guide it to attack any enemy piece (not on a power point). Elementals cannot attack pieces on power points. They always die after combat regardless of the result.</p>
+
 <table>
-    <tr><th>Piece</th><th>Type</th><th>HP</th><th>Steps</th><th>DMG</th><th>Description</th></tr>
+    <tr><th>Elemental</th><th>HP</th><th>DMG</th><th>Shot spd</th><th>Attack rate</th><th>Speed</th><th>Notes</th></tr>
+    <tr><td style="color:#55ffff">Air</td><td>12</td><td>5</td><td>8</td><td>1.38s</td><td>100</td><td>Fastest reachability (maxSteps=99 — goes anywhere instantly)</td></tr>
+    <tr><td style="color:#ff6600">Fire</td><td>10</td><td>9</td><td>10</td><td>1.16s</td><td>100</td><td>Highest DPS of elementals. Fast shot and short attack rate.</td></tr>
+    <tr><td style="color:#88aa55">Earth</td><td>17</td><td>9</td><td>6</td><td>1.98s</td><td>75</td><td>Highest HP of elementals. Slow like Golem/Troll. Tanky.</td></tr>
+    <tr><td style="color:#5588ff">Water</td><td>14</td><td>6</td><td>6</td><td>1.96s</td><td>100</td><td>Balanced. Good HP, moderate damage.</td></tr>
+</table>
+<div class="note">Fire Elemental is generally the best offensive choice. Earth Elemental is best against a Dragon or other high-damage piece (high HP to absorb hits).</div>
+
+<hr>
+
+<!-- ══ SPELLS ════════════════════════════════════════════════════════════ -->
+<h2>SPELLS</h2>
+<p>To cast: select mage → cursor back on own mage → Enter/Shift → UP/DOWN browse → Enter/Shift to cast → follow prompt.</p>
+<p>Each spell used <b>once per game</b>. Pieces on power points are immune to targeting spells.</p>
+
+<table>
+    <tr><th>#</th><th>Spell</th><th>How to use after casting</th><th>Effect</th></tr>
     <tr>
-        <td class="piece-name-d">Sorceress</td>
-        <td><span class="tag mage-tag">MAGE</span><span class="tag fly">FLY</span></td>
-        <td>10</td><td>3</td><td>8</td>
-        <td>Dark mirror of the Wizard. Same spell pool, slightly lower combat damage. Losing her costs all dark spells.</td>
+        <td style="color:#ffff55">0</td><td>Teleport</td>
+        <td>Click own piece → click destination</td>
+        <td>Move any of your pieces to any empty or enemy square on the board</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Dragon</td>
-        <td><span class="tag fly">FLY</span><span class="tag rng">RANGED</span></td>
-        <td>17</td><td>4</td><td>11</td>
-        <td>Strongest piece in the game. Highest HP and damage. Slow fire rate — timing is critical. Priority target.</td>
+        <td style="color:#ffff55">1</td><td>Heal</td>
+        <td>Click injured own piece</td>
+        <td>Restore a piece to full HP (removes all injuries)</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Shapeshifter</td>
-        <td><span class="tag fly">FLY</span></td>
-        <td>—</td><td>5</td><td>—</td>
-        <td>Copies the opponent's piece at the start of combat — inheriting all stats. Unpredictable and highly mobile. Best used against strong isolated enemies.</td>
+        <td style="color:#ffff55">2</td><td>Shift Time</td>
+        <td><i>Auto — no target needed</i></td>
+        <td>Reverses cycle direction. At phase 0 or 5 it adds an extra step instead.</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Basilisk</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>6</td><td>3</td><td>9</td>
-        <td>Fragile but fires a fast, high-damage beam. Dark counterpart to the Unicorn but even more lethal per hit — just harder to land.</td>
+        <td style="color:#ffff55">3</td><td>Exchange</td>
+        <td>Click piece 1 → click piece 2</td>
+        <td>Swap positions of any two pieces (own/enemy, any mix). Useful to remove enemies from power points.</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Troll</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>14</td><td>3</td><td>10</td>
-        <td>Slow, tough dark brawler. Essentially identical to the Golem. Use to anchor power points.</td>
+        <td style="color:#ffff55">4</td><td>Summon Elemental</td>
+        <td>Guide elemental → click enemy to fight</td>
+        <td>Random elemental appears. Send it against any non-PP enemy.</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Banshee</td>
-        <td><span class="tag fly">FLY</span><span class="tag rng">SCREAM</span></td>
-        <td>8</td><td>3</td><td>1</td>
-        <td>Screams that deal minimal damage per frame but cover a huge area and linger. Very hard to avoid. Effective on charmed squares.</td>
+        <td style="color:#ffff55">5</td><td>Revive</td>
+        <td>Select dead piece (up/down) → place on charmed square</td>
+        <td>Bring back one dead piece onto a free charmed square.</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Manticore</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag rng">RANGED</span></td>
-        <td>8</td><td>3</td><td>4</td>
-        <td>Weaker version of Valkyrie without flight. Low damage but decent HP. Flanker role.</td>
+        <td style="color:#ffff55">6</td><td>Imprison</td>
+        <td>Click enemy piece</td>
+        <td>Enemy piece cannot move next turn. Wasted if cast at wrong cycle phase.</td>
     </tr>
     <tr>
-        <td class="piece-name-d">Goblin</td>
-        <td><span class="tag gnd">GROUND</span><span class="tag mel">MELEE</span></td>
-        <td>5</td><td>3</td><td>5</td>
-        <td>Dark counterpart to the Knight. Identical stats. Very fast attack rate in melee. Swarms effectively. 7 per army.</td>
+        <td style="color:#ffff55">7</td><td>Cease Conjuring</td>
+        <td><i>Auto — no target needed</i></td>
+        <td>Instantly remove all elementals from the board.</td>
     </tr>
 </table>
+<div class="warn">Imprison is wasted: for Dark at cycle phase 0, for Light at cycle phase 5. The game will warn you before casting.</div>
 
-<!-- ══ ELEMENTALS ══════════════════════════════════════════════════════════ -->
-<h2>ELEMENTALS (Summoned)</h2>
-<p>Summoned by the <span class="yellow">Summon Elemental</span> spell. Type is random. Elementals cannot be placed on power points and disappear after combat.</p>
-<table>
-    <tr><th>Elemental</th><th>HP</th><th>DMG</th><th>Notes</th></tr>
-    <tr><td>Air</td><td>12</td><td>5</td><td>Fast, can reach anywhere instantly (maxSteps=99)</td></tr>
-    <tr><td>Fire</td><td>10</td><td>9</td><td>High damage, fast shot</td></tr>
-    <tr><td>Earth</td><td>16</td><td>8</td><td>Very high HP, tanky</td></tr>
-    <tr><td>Water</td><td>12</td><td>7</td><td>Balanced</td></tr>
-</table>
+<hr>
 
-<!-- ══ COMBAT ══════════════════════════════════════════════════════════════ -->
-<h2>COMBAT</h2>
-<p>When a piece moves onto an enemy square, real-time combat begins in a small arena with barriers.</p>
-<ul>
-    <li>Both pieces fight until one (or both) HP reaches zero</li>
-    <li>Damage carries over as <span class="yellow">injuries</span> — a piece that survives many fights gets weaker</li>
-    <li>Fighting on <span class="yellow">your side's charmed square</span> grants an HP bonus (damage reduction)</li>
-    <li>Power point squares also grant a bonus to the defending piece</li>
-    <li>If both pieces die simultaneously, both are removed</li>
-    <li>The winner occupies the contested square</li>
-    <li>Elementals are always removed after combat</li>
-</ul>
-<div class="note">TIP: Never challenge a Dragon on a dark square unless you have an overwhelming advantage. Retreat and use Imprison or fight on a charmed light square instead.</div>
-
-<!-- ══ SPELLS ══════════════════════════════════════════════════════════════ -->
-<h2>SPELLS (Wizard / Sorceress)</h2>
-<p>To use a spell: select your mage → press Enter on the mage's own square → Up/Down to browse → Enter to cast.</p>
-<p>Each spell can only be used <span class="yellow">once per game</span>. Pieces on power points are immune to most spells.</p>
-<table>
-    <tr><th>#</th><th>Spell</th><th>Effect</th></tr>
-    <tr><td class="yellow">0</td><td>Teleport</td><td>Pick any of your pieces → move it anywhere on the board. Cannot move pieces from power points.</td></tr>
-    <tr><td class="yellow">1</td><td>Heal</td><td>Restore a piece to full HP. Cannot heal pieces on power points.</td></tr>
-    <tr><td class="yellow">2</td><td>Shift Time</td><td>Auto-cast. Reverses the light cycle direction, or at phase 0/5 adds an extra step.</td></tr>
-    <tr><td class="yellow">3</td><td>Exchange</td><td>Swap positions of any two pieces (own/enemy, any combination). Useful to displace enemies from power points.</td></tr>
-    <tr><td class="yellow">4</td><td>Summon Elemental</td><td>A random elemental appears — guide it to attack any enemy piece (not on power point).</td></tr>
-    <tr><td class="yellow">5</td><td>Revive</td><td>Bring back one of your dead pieces and place it on a free charmed square.</td></tr>
-    <tr><td class="yellow">6</td><td>Imprison</td><td>Trap an enemy piece — it cannot move next turn. Wasted if cast at the wrong cycle phase.</td></tr>
-    <tr><td class="yellow">7</td><td>Cease Conjuring</td><td>Remove all elementals from the board instantly.</td></tr>
-</table>
-<div class="note">NOTE: Imprison is wasted for Dark at cycle phase 0, and for Light at cycle phase 5 — the game will warn you.</div>
-
-<!-- ══ CONTROLS ═══════════════════════════════════════════════════════════ -->
+<!-- ══ CONTROLS ══════════════════════════════════════════════════════════ -->
 <h2>CONTROLS</h2>
-<h3>Single Player — Light Side (default)</h3>
+<div class="col2">
+<div>
+<h3>Light side / Player 1</h3>
 <table>
     <tr><th>Action</th><th>Key</th></tr>
-    <tr><td>Move cursor</td><td><span class="kbd">↑</span> <span class="kbd">↓</span> <span class="kbd">←</span> <span class="kbd">→</span></td></tr>
+    <tr><td>Move cursor</td><td><span class="kbd">↑</span><span class="kbd">↓</span><span class="kbd">←</span><span class="kbd">→</span></td></tr>
     <tr><td>Select / Confirm</td><td><span class="kbd">Enter</span></td></tr>
-    <tr><td>Open spell browser (mage)</td><td>Select mage → move cursor back onto mage → <span class="kbd">Enter</span></td></tr>
-    <tr><td>Browse spells</td><td><span class="kbd">↑</span> / <span class="kbd">↓</span> then <span class="kbd">Enter</span></td></tr>
-    <tr><td>Return to menu</td><td><span class="kbd">Esc</span></td></tr>
+    <tr><td>Browse spells (up/down)</td><td><span class="kbd">↑</span> / <span class="kbd">↓</span></td></tr>
+    <tr><td>Back / Escape</td><td><span class="kbd">Esc</span></td></tr>
 </table>
-<h3>Single Player — Dark Side (if you chose Dark)</h3>
+</div>
+<div>
+<h3>Dark side / Player 2</h3>
 <table>
     <tr><th>Action</th><th>Key</th></tr>
-    <tr><td>Move cursor</td><td><span class="kbd">W</span> <span class="kbd">S</span> <span class="kbd">A</span> <span class="kbd">D</span></td></tr>
+    <tr><td>Move cursor</td><td><span class="kbd">W</span><span class="kbd">S</span><span class="kbd">A</span><span class="kbd">D</span></td></tr>
     <tr><td>Select / Confirm</td><td><span class="kbd">Left Shift</span></td></tr>
-    <tr><td>Browse spells</td><td><span class="kbd">W</span> / <span class="kbd">S</span> then <span class="kbd">Left Shift</span></td></tr>
-    <tr><td>Return to menu</td><td><span class="kbd">Esc</span></td></tr>
+    <tr><td>Browse spells (up/down)</td><td><span class="kbd">W</span> / <span class="kbd">S</span></td></tr>
+    <tr><td>Back / Escape</td><td><span class="kbd">Esc</span></td></tr>
 </table>
-<h3>Multiplayer</h3>
-<table>
-    <tr><th>Side</th><th>Move</th><th>Fire / Confirm</th></tr>
-    <tr><td>Light (Player 1)</td><td><span class="kbd">↑↓←→</span></td><td><span class="kbd">Enter</span></td></tr>
-    <tr><td>Dark (Player 2)</td><td><span class="kbd">W A S D</span></td><td><span class="kbd">Left Shift</span></td></tr>
-</table>
+</div>
+</div>
+<div class="note">In single player, if you chose to play Dark, your controls are WASD+Shift. ESC always returns to the main menu.</div>
 
-<!-- ══ TIPS ════════════════════════════════════════════════════════════════ -->
+<hr>
+
+<!-- ══ TIPS ══════════════════════════════════════════════════════════════ -->
 <h2>STRATEGY TIPS</h2>
 <ul>
-    <li>Control power points early — even holding 3 creates pressure</li>
-    <li>Protect your Mage. Dead mage = no spells for the rest of the game</li>
-    <li>Imprison the enemy mage first if you can — it prevents spells for a turn</li>
-    <li>Use the Shapeshifter against the Dragon — it copies the Dragon's own stats</li>
-    <li>Fight on charmed squares of your colour for an HP advantage</li>
-    <li>Heal injured high-value pieces (Dragon, Golem, Djinni) before they die</li>
-    <li>Shift Time when the cycle is at phase 0 or 1 (dark territory) to flip it back</li>
-    <li>Knights and Goblins are expendable — use them to scout and probe defenses</li>
+    <li>Rush at least 2–3 power points in the opening. Pressure forces enemy to respond or concede ground.</li>
+    <li>Keep the Wizard/Sorceress on a power point — immune to spells, gets healed, can still attack.</li>
+    <li>Use the Shapeshifter against the Dragon — it becomes the Dragon and the fight is even.</li>
+    <li>Imprison the enemy mage first — no spells for a turn and they cannot move to safety.</li>
+    <li>Heal high-value pieces (Dragon, Golem, Djinni) before they accumulate too many injuries.</li>
+    <li>Shift Time when the cycle is heading toward the enemy's extreme (phase 0 = bad for Dark, phase 5 = bad for Light).</li>
+    <li>Knights/Goblins are expendable. Use them to block, probe defenses, or sacrifice to delay an enemy advance.</li>
+    <li>Against a Golem/Troll on a power point: use Exchange to swap them with a weak piece, or Teleport to move your own heavy piece onto it first.</li>
+    <li>Banshee is most effective when you force the enemy into a corner of the arena. At close range the scream is unavoidable.</li>
+    <li>Fire Elemental is the best summon choice for attacking a normal piece. Earth Elemental can sometimes survive fighting the Dragon.</li>
 </ul>
 
 <a class="back" href="/">&#x25C4; BACK TO MAIN MENU</a>
