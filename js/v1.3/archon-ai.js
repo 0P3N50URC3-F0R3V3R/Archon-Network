@@ -43,6 +43,9 @@
     var PP   = [{col:4,row:0},{col:0,row:4},{col:4,row:4},{col:8,row:4},{col:4,row:8}];
     var KEYS = null;
 
+    // ── Combat orbit state ────────────────────────────────────────────────────
+    var combatAngle = 0;   // persistent orbit angle, increments every frame
+
     // ── Board AI state ────────────────────────────────────────────────────────
     var bState      = 'idle';
     var bTimer      = 0;
@@ -409,7 +412,6 @@
         else if (hpRatio < 0.55 && isRanged) opt = opt + 30;  // hurt: cautious
 
         var ml=false,mr=false,mu=false,md=false,doFire=false;
-        var t=game.frameCounters?(game.frameCounters.combat||0):0;
 
         if (dist > opt+25) {
             // Close in
@@ -420,14 +422,13 @@
             if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
             else{if(dy>0)mu=true;else md=true;}
         } else {
-            // True orbit: move perpendicular to enemy direction
-            // Perpendicular of (dx,dy) is (-dy,dx). Flip sign every strafeFreq frames.
-            var strafeSign = (Math.floor(t/CFG.strafeFreq)%2===0) ? 1 : -1;
-            var nd = Math.max(dist, 1);
-            var perpX = (-dy/nd) * strafeSign;
-            var perpY = ( dx/nd) * strafeSign;
-            if(Math.abs(perpX)>=Math.abs(perpY)){if(perpX>0)mr=true;else ml=true;}
-            else{if(perpY>0)md=true;else mu=true;}
+            // Smooth orbit: increment a persistent angle each frame.
+            // No reversals → no back-and-forth.
+            combatAngle += 0.05;
+            var ox = Math.cos(combatAngle);
+            var oy = Math.sin(combatAngle);
+            if(Math.abs(ox)>=Math.abs(oy)){if(ox>0)mr=true;else ml=true;}
+            else{if(oy>0)md=true;else mu=true;}
         }
 
         if (CFG.dodgeDist>0) {
