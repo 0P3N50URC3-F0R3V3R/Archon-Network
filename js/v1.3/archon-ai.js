@@ -418,9 +418,13 @@
             // MELEE: orbit at close range → dash in → hit → retreat
             if (meleeRetreatTimer > 0) {
                 meleeRetreatTimer--;
-                // Back away from enemy
-                if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
-                else{if(dy>0)mu=true;else md=true;}
+                if (dist > 72) {
+                    meleeRetreatTimer = 0;  // far enough — stop retreating early
+                } else {
+                    // Back away from enemy
+                    if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
+                    else{if(dy>0)mu=true;else md=true;}
+                }
             } else {
                 // Circle at ~42px; natural orbit will bring AI within 28px to strike
                 combatAngle += 0.04;
@@ -472,7 +476,7 @@
         if (aRate===0) {
             if(auraRange&&dist<auraRange)        doFire=true;
             else if(isRanged&&dist<CFG.fireDist) doFire=true;
-            else if(!isRanged&&dist<28)        { doFire=true; meleeRetreatTimer=32; }
+            else if(!isRanged&&dist<28)        { doFire=true; meleeRetreatTimer=65; }
         }
 
         clr();
