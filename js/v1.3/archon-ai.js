@@ -155,7 +155,7 @@
     }
 
     function getMostInjured() {
-        var worst=null, worstRatio=0.65;  // only heal below 65% HP
+        var worst=null, worstRatio=0.75;  // heal below 75% HP
         for (var i=0;i<game.icons.length;i++) {
             var ic=game.icons[i];
             if (ic.dead||ic.side!==AI||ic.baseHP<=0) continue;
@@ -205,8 +205,19 @@
             if (st) { bSpellTarget=st; return 4; }
         }
 
-        // 4. Shift time when cycle is at extreme (0=bad for dark, favor 3/4/5)
-        if (spellAvail(2) && game.circleStatus <= 1) return 2;
+        // 4. Cease Conjuring if enemy has an active elemental
+        if (spellAvail(7)) {
+            for (var i=0;i<game.icons.length;i++) {
+                var ic=game.icons[i];
+                if (!ic.dead && ic.side!==AI && ic.isElemental && ic.isElemental()) { return 7; }
+            }
+        }
+
+        // 5. Shift time when cycle is at extreme (0=bad for dark, 5=bad for light)
+        if (spellAvail(2)) {
+            if (AI==='dark'&&game.circleStatus<=1) return 2;
+            if (AI==='light'&&game.circleStatus>=4) return 2;
+        }
 
         return -1;  // no spell, just move/teleport
     }
@@ -390,20 +401,33 @@
         var dx=huIcon.x-aiIcon.x, dy=huIcon.y-aiIcon.y;
         var dist=Math.sqrt(dx*dx+dy*dy);
         var isRanged=!!(RANGED[aiIcon.type]);
-        var opt=CFG.combatRange;
+
+        // HP-aware distance: low HP → keep further back
+        var hpRatio = aiIcon.hp / Math.max(aiIcon.baseHP || aiIcon.hp, 1);
+        var opt = CFG.combatRange;
+        if      (hpRatio < 0.30 && isRanged) opt = 160;  // near-death: flee
+        else if (hpRatio < 0.55 && isRanged) opt = opt + 30;  // hurt: cautious
 
         var ml=false,mr=false,mu=false,md=false,doFire=false;
+        var t=game.frameCounters?(game.frameCounters.combat||0):0;
 
-        if (dist>opt+25) {
+        if (dist > opt+25) {
+            // Close in
             if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
             else{if(dy>0)md=true;else mu=true;}
-        } else if (isRanged&&dist<opt-25) {
+        } else if (isRanged && dist < opt-25) {
+            // Back off
             if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
             else{if(dy>0)mu=true;else md=true;}
         } else {
-            var t=game.frameCounters?(game.frameCounters.combat||0):0;
-            var cw=Math.floor(t/CFG.strafeFreq)%2===0;
-            if(Math.abs(dx)>=Math.abs(dy)){mu=cw;md=!cw;}else{ml=cw;mr=!cw;}
+            // True orbit: move perpendicular to enemy direction
+            // Perpendicular of (dx,dy) is (-dy,dx). Flip sign every strafeFreq frames.
+            var strafeSign = (Math.floor(t/CFG.strafeFreq)%2===0) ? 1 : -1;
+            var nd = Math.max(dist, 1);
+            var perpX = (-dy/nd) * strafeSign;
+            var perpY = ( dx/nd) * strafeSign;
+            if(Math.abs(perpX)>=Math.abs(perpY)){if(perpX>0)mr=true;else ml=true;}
+            else{if(perpY>0)md=true;else mu=true;}
         }
 
         if (CFG.dodgeDist>0) {
