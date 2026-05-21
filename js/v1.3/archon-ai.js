@@ -30,10 +30,15 @@
         valkyrie:5, troll:4, archer:4, knight:3, goblin:3
     };
     var RANGED = {
-        wizard:1, sorceress:1, dragon:1, phoenix:1, djinni:1,
-        unicorn:1, basilisk:1, shapeshifter:1, banshee:1, manticore:1,
+        wizard:1, sorceress:1, dragon:1, djinni:1,
+        unicorn:1, basilisk:1, shapeshifter:1, manticore:1,
         valkyrie:1, archer:1
+        // phoenix: aura (close-range, not directional) — handled separately
+        // banshee: scream (close-range) — handled separately
     };
+
+    // Close-range fire threshold override (aura/scream pieces)
+    var AURA_RANGE = {phoenix: 50, banshee: 60};
 
     var PP   = [{col:4,row:0},{col:0,row:4},{col:4,row:4},{col:8,row:4},{col:4,row:8}];
     var KEYS = null;
@@ -377,6 +382,11 @@
         var aiIcon=game.combat.icons[AI], huIcon=game.combat.icons[PLAYER_SIDE];
         if (!aiIcon||!huIcon||aiIcon.hp<=0) { clr(); return; }
 
+        // While AI's own attack is active, release all keys and wait.
+        // Game freezes Phoenix/Knight/Goblin during their attack — injecting keys
+        // just rotates the sprite without moving.
+        if (game.combat.bullet[AI] !== false) { clr(); return; }
+
         var dx=huIcon.x-aiIcon.x, dy=huIcon.y-aiIcon.y;
         var dist=Math.sqrt(dx*dx+dy*dy);
         var isRanged=!!(RANGED[aiIcon.type]);
@@ -418,9 +428,16 @@
         if(aiIcon.y<25){mu=false;md=true;} if(aiIcon.y>167){md=false;mu=true;}
 
         var aRate=game.combat.attackRate?game.combat.attackRate[AI]:0;
+        var auraRange=AURA_RANGE[aiIcon.type]||0;
         if (aRate===0) {
-            if(isRanged&&dist<CFG.fireDist) doFire=true;
-            if(!isRanged&&dist<28)          doFire=true;
+            if(auraRange&&dist<auraRange)   doFire=true;  // phoenix / banshee
+            else if(isRanged&&dist<CFG.fireDist) doFire=true;
+            else if(!isRanged&&dist<28)          doFire=true;
+        }
+        // Aura/scream pieces close in, don't keep distance
+        if (auraRange && dist<auraRange+25 && !doFire) {
+            if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
+            else{if(dy>0)md=true;else mu=true;}
         }
 
         clr();
