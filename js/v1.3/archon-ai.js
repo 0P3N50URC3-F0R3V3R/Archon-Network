@@ -5,7 +5,9 @@
 (function () {
     'use strict';
 
-    var DIFFICULTY = parseInt(new URLSearchParams(window.location.search).get('d') || '2');
+    var DIFFICULTY   = parseInt(new URLSearchParams(window.location.search).get('d')    || '2');
+    var PLAYER_SIDE  = new URLSearchParams(window.location.search).get('side') || 'light';
+    var AI           = (PLAYER_SIDE === 'light') ? 'dark' : 'light';
 
     // ── Per-difficulty tuning ─────────────────────────────────────────────────
     var CFG = {
@@ -33,8 +35,7 @@
         valkyrie:1, archer:1
     };
 
-    var PP = [{col:4,row:0},{col:0,row:4},{col:4,row:4},{col:8,row:4},{col:4,row:8}];
-    var AI   = 'dark';
+    var PP   = [{col:4,row:0},{col:0,row:4},{col:4,row:4},{col:8,row:4},{col:4,row:8}];
     var KEYS = null;
 
     // ── Board AI state ────────────────────────────────────────────────────────
@@ -135,12 +136,13 @@
     }
 
     function getBestImprisonTarget() {
-        // Don't cast imprison if it would be wasted (circleStatus=0 for dark mage)
-        if (game.circleStatus === 0) return null;
+        // Imprison is wasted: dark at status 0, light at status 5
+        if (AI==='dark'&&game.circleStatus===0) return null;
+        if (AI==='light'&&game.circleStatus===5) return null;
         var best=null, bestP=6;  // only target power >= 7
         for (var i=0;i<game.icons.length;i++) {
             var ic=game.icons[i];
-            if (ic.dead||ic.imprisoned||ic.side!==('light')) continue;
+            if (ic.dead||ic.imprisoned||ic.side!==PLAYER_SIDE) continue;
             var p=POWER[ic.type]||5;
             if (p>=bestP && !isPP(ic.col,ic.row)) { bestP=p; best=ic; }
         }
@@ -165,7 +167,7 @@
             // Fallback: non-PP light pieces
             for (var i=0;i<game.icons.length;i++) {
                 var ic=game.icons[i];
-                if (!ic.dead&&!ic.imprisoned&&ic.side==='light'&&!isPP(ic.col,ic.row)) spellable.push(ic);
+                if (!ic.dead&&!ic.imprisoned&&ic.side===PLAYER_SIDE&&!isPP(ic.col,ic.row)) spellable.push(ic);
             }
         }
         var best=null, bestP=0;
@@ -372,7 +374,7 @@
     // ── Combat AI tick ────────────────────────────────────────────────────────
     function combatTick() {
         if (game.combat.status!=='combat') { clr(); return; }
-        var aiIcon=game.combat.icons[AI], huIcon=game.combat.icons['light'];
+        var aiIcon=game.combat.icons[AI], huIcon=game.combat.icons[PLAYER_SIDE];
         if (!aiIcon||!huIcon||aiIcon.hp<=0) { clr(); return; }
 
         var dx=huIcon.x-aiIcon.x, dy=huIcon.y-aiIcon.y;
@@ -395,7 +397,7 @@
         }
 
         if (CFG.dodgeDist>0) {
-            var bul=game.combat.bullet['light'];
+            var bul=game.combat.bullet[PLAYER_SIDE];
             if (bul&&bul.posX!==undefined) {
                 var bx=bul.posX-aiIcon.x, by=bul.posY-aiIcon.y;
                 if (Math.sqrt(bx*bx+by*by)<CFG.dodgeDist) {
@@ -434,9 +436,15 @@
 
     // ── Engine patch ──────────────────────────────────────────────────────────
     function patchEngine() {
-        engine.options.lightControl='keyboardArrows';
-        engine.options.darkControl='keyboardWasd';
-        KEYS=DATA.keys[1];
+        // Player always uses arrow keys; AI always uses WASD
+        if (PLAYER_SIDE==='light') {
+            engine.options.lightControl='keyboardArrows';
+            engine.options.darkControl='keyboardWasd';
+        } else {
+            engine.options.lightControl='keyboardWasd';
+            engine.options.darkControl='keyboardArrows';
+        }
+        KEYS=DATA.keys[1];  // AI always injects into WASD keys
 
         // ESC always returns to landing page
         var _kd=document.onkeydown;

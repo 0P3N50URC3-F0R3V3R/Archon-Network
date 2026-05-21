@@ -5,59 +5,75 @@
     <link rel="shortcut icon" href="favicon.ico">
     <title>Archon</title>
     <style>
-        @font-face { font-family: C64; src: url('fonts/v2.0/C64_Pro-STYLE.woff2') format('woff2'); }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            background:#000; display:flex; align-items:center; justify-content:center;
-            min-height:100vh; font-family:C64,monospace;
-        }
-        #frame {
-            border:8px solid #3333aa; background:#0000aa;
-            padding:44px 52px; text-align:center;
-        }
-        h1 { color:#fff; font-size:40px; letter-spacing:12px; margin-bottom:6px; text-shadow:4px 4px #000044; }
-        .tagline { color:#aaaaff; font-size:12px; letter-spacing:3px; margin-bottom:36px; }
-        .section-label { color:#ffff55; font-size:11px; letter-spacing:3px; margin:20px 0 8px; }
-        .btn {
-            display:block; width:320px; padding:16px 0; margin:8px auto;
-            background:#000080; border:3px solid #8888ff;
-            color:#fff; font-family:C64,monospace; font-size:15px;
-            letter-spacing:3px; text-decoration:none; text-align:center; cursor:pointer;
-            transition:background .1s, border-color .1s, color .1s;
-        }
-        .btn:hover { background:#2222aa; border-color:#fff; color:#ffff00; }
-        .row { display:flex; gap:8px; justify-content:center; margin:4px 0; }
-        .btn-sm {
-            flex:1; max-width:100px; padding:14px 0;
-            background:#000080; border:3px solid #8888ff;
-            color:#aaaaff; font-family:C64,monospace; font-size:12px;
-            letter-spacing:2px; text-decoration:none; text-align:center; cursor:pointer;
-            transition:background .1s, border-color .1s, color .1s;
-        }
-        .btn-sm:hover { background:#2222aa; border-color:#fff; color:#ffff00; }
-        .hint { color:#5555cc; font-size:10px; letter-spacing:2px; margin-top:28px; }
-        .divider { border:none; border-top:1px solid #222288; margin:20px 0; }
+        @font-face { font-family:C64; src:url('fonts/v2.0/C64_Pro-STYLE.woff2') format('woff2'); }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:C64,monospace;}
+        #frame{border:8px solid #3333aa;background:#0000aa;padding:40px 48px;text-align:center;min-width:360px;}
+        h1{color:#fff;font-size:38px;letter-spacing:10px;margin-bottom:4px;text-shadow:4px 4px #000044;}
+        .tagline{color:#aaaaff;font-size:11px;letter-spacing:3px;margin-bottom:30px;}
+        .sec{color:#ffff55;font-size:11px;letter-spacing:3px;margin:18px 0 8px;}
+        .btn{display:block;width:300px;padding:15px 0;margin:8px auto;background:#000080;border:3px solid #8888ff;
+             color:#fff;font-family:C64,monospace;font-size:14px;letter-spacing:3px;text-decoration:none;
+             text-align:center;cursor:pointer;transition:background .1s,border-color .1s,color .1s;}
+        .btn:hover{background:#2222aa;border-color:#fff;color:#ffff00;}
+        .row{display:flex;gap:6px;justify-content:center;margin:4px 0;}
+        .sm{flex:1;max-width:94px;padding:13px 0;background:#000080;border:3px solid #8888ff;
+            color:#aaaaff;font-family:C64,monospace;font-size:11px;letter-spacing:2px;text-decoration:none;
+            text-align:center;cursor:pointer;transition:background .1s,border-color .1s,color .1s;}
+        .sm:hover,.sm.sel{background:#2222aa;border-color:#fff;color:#ffff00;}
+        #side-pick{display:none;margin:10px 0 4px;}
+        .side-label{color:#55ffff;font-size:11px;letter-spacing:2px;margin-bottom:6px;}
+        .side-row{display:flex;gap:6px;justify-content:center;}
+        .side-btn{flex:1;max-width:140px;padding:13px 0;background:#000060;border:3px solid #5555aa;
+                  color:#aaaaff;font-family:C64,monospace;font-size:12px;letter-spacing:2px;
+                  text-decoration:none;text-align:center;cursor:pointer;
+                  transition:background .1s,border-color .1s,color .1s;}
+        .side-btn:hover{background:#2222aa;border-color:#ffff00;color:#ffff00;}
+        hr{border:none;border-top:1px solid #222288;margin:18px 0;}
+        .hint{color:#5555cc;font-size:10px;letter-spacing:2px;margin-top:6px;}
+        .manual-link{display:inline-block;margin-top:20px;color:#5555ff;font-size:10px;letter-spacing:2px;
+                     text-decoration:none;border-bottom:1px solid #3333aa;padding-bottom:2px;}
+        .manual-link:hover{color:#aaaaff;}
     </style>
 </head>
 <body>
-    <div id="frame">
-        <h1>ARCHON</h1>
-        <div class="tagline">THE LIGHT AND THE DARK</div>
+<div id="frame">
+    <h1>ARCHON</h1>
+    <div class="tagline">THE LIGHT AND THE DARK</div>
 
-        <div class="section-label">&#x25BA; SINGLE PLAYER</div>
-        <div class="row">
-            <a class="btn-sm" href="singleplayer.html?d=1">EASY</a>
-            <a class="btn-sm" href="singleplayer.html?d=2">NORMAL</a>
-            <a class="btn-sm" href="singleplayer.html?d=3">HARD</a>
-        </div>
-
-        <hr class="divider">
-
-        <div class="section-label">&#x25BA; MULTIPLAYER</div>
-        <a class="btn" href="multiplayer.html">LAN / VPN</a>
-
-        <div class="hint">single player: you are light &bull; arrows + enter</div>
-        <div class="hint">esc during game &rarr; back to this screen</div>
+    <div class="sec">&#x25BA; SINGLE PLAYER</div>
+    <div class="row">
+        <a class="sm" href="#" onclick="pickDiff(1);return false;">EASY</a>
+        <a class="sm" href="#" onclick="pickDiff(2);return false;">NORMAL</a>
+        <a class="sm" href="#" onclick="pickDiff(3);return false;">HARD</a>
     </div>
+    <div id="side-pick">
+        <div class="side-label">choose your side:</div>
+        <div class="side-row">
+            <a class="side-btn" id="btn-light" href="#">&#x2600; LIGHT</a>
+            <a class="side-btn" id="btn-dark"  href="#">&#x263D; DARK</a>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="sec">&#x25BA; MULTIPLAYER</div>
+    <a class="btn" href="multiplayer.html">LAN / VPN</a>
+
+    <div class="hint">light: arrow keys + enter &nbsp;|&nbsp; dark: wasd + shift</div>
+    <div class="hint">esc during game &rarr; back here</div>
+    <br>
+    <a class="manual-link" href="manual.html" target="_blank">&#x2753; OPEN MANUAL</a>
+</div>
+<script>
+var d=2;
+function pickDiff(n){
+    d=n;
+    document.querySelectorAll('.sm').forEach(function(el,i){el.classList.toggle('sel',i===n-1);});
+    document.getElementById('side-pick').style.display='block';
+    document.getElementById('btn-light').href='singleplayer.html?d='+n+'&side=light';
+    document.getElementById('btn-dark').href ='singleplayer.html?d='+n+'&side=dark';
+}
+</script>
 </body>
 </html>
