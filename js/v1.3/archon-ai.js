@@ -413,22 +413,25 @@
 
         var ml=false,mr=false,mu=false,md=false,doFire=false;
 
-        if (dist > opt+25) {
-            // Close in
+        if (!isRanged && !auraRange) {
+            // MELEE: charge straight at enemy every frame — no orbiting
             if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
             else{if(dy>0)md=true;else mu=true;}
-        } else if (isRanged && dist < opt-25) {
-            // Back off
-            if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
-            else{if(dy>0)mu=true;else md=true;}
+        } else if (auraRange) {
+            // AURA (phoenix/banshee): close in until in range
+            if(dist > auraRange-10) {
+                if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
+                else{if(dy>0)md=true;else mu=true;}
+            }
         } else {
-            // Smooth orbit: increment a persistent angle each frame.
-            // No reversals → no back-and-forth.
-            combatAngle += 0.05;
-            var ox = Math.cos(combatAngle);
-            var oy = Math.sin(combatAngle);
-            if(Math.abs(ox)>=Math.abs(oy)){if(ox>0)mr=true;else ml=true;}
-            else{if(oy>0)md=true;else mu=true;}
+            // RANGED: orbit AROUND the enemy (enemy-relative, tracks movement).
+            // Target = enemy position + orbit radius at current angle.
+            // AI always moves toward that target → naturally follows enemy.
+            combatAngle += 0.03;
+            var tx = huIcon.x + Math.cos(combatAngle) * opt - aiIcon.x;
+            var ty = huIcon.y + Math.sin(combatAngle) * opt - aiIcon.y;
+            if(Math.abs(tx)>=Math.abs(ty)){if(tx>0)mr=true;else ml=true;}
+            else{if(ty>0)md=true;else mu=true;}
         }
 
         if (CFG.dodgeDist>0) {
@@ -455,14 +458,9 @@
         var aRate=game.combat.attackRate?game.combat.attackRate[AI]:0;
         var auraRange=AURA_RANGE[aiIcon.type]||0;
         if (aRate===0) {
-            if(auraRange&&dist<auraRange)   doFire=true;  // phoenix / banshee
+            if(auraRange&&dist<auraRange)        doFire=true;
             else if(isRanged&&dist<CFG.fireDist) doFire=true;
             else if(!isRanged&&dist<28)          doFire=true;
-        }
-        // Aura/scream pieces close in, don't keep distance
-        if (auraRange && dist<auraRange+25 && !doFire) {
-            if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
-            else{if(dy>0)md=true;else mu=true;}
         }
 
         clr();
