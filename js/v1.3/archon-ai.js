@@ -43,8 +43,9 @@
     var PP   = [{col:4,row:0},{col:0,row:4},{col:4,row:4},{col:8,row:4},{col:4,row:8}];
     var KEYS = null;
 
-    // ── Combat orbit state ────────────────────────────────────────────────────
-    var combatAngle = 0;   // persistent orbit angle, increments every frame
+    // ── Combat state ─────────────────────────────────────────────────────────
+    var combatAngle       = 0;   // persistent orbit angle
+    var meleeRetreatTimer = 0;   // frames of retreat after a melee hit
 
     // ── Board AI state ────────────────────────────────────────────────────────
     var bState      = 'idle';
@@ -414,9 +415,20 @@
         var ml=false,mr=false,mu=false,md=false,doFire=false;
 
         if (!isRanged && !auraRange) {
-            // MELEE: charge straight at enemy every frame — no orbiting
-            if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)mr=true;else ml=true;}
-            else{if(dy>0)md=true;else mu=true;}
+            // MELEE: orbit at close range → dash in → hit → retreat
+            if (meleeRetreatTimer > 0) {
+                meleeRetreatTimer--;
+                // Back away from enemy
+                if(Math.abs(dx)>=Math.abs(dy)){if(dx>0)ml=true;else mr=true;}
+                else{if(dy>0)mu=true;else md=true;}
+            } else {
+                // Circle at ~42px; natural orbit will bring AI within 28px to strike
+                combatAngle += 0.04;
+                var mtx = huIcon.x + Math.cos(combatAngle)*42 - aiIcon.x;
+                var mty = huIcon.y + Math.sin(combatAngle)*42 - aiIcon.y;
+                if(Math.abs(mtx)>=Math.abs(mty)){if(mtx>0)mr=true;else ml=true;}
+                else{if(mty>0)md=true;else mu=true;}
+            }
         } else if (auraRange) {
             // AURA (phoenix/banshee): close in until in range
             if(dist > auraRange-10) {
@@ -460,7 +472,7 @@
         if (aRate===0) {
             if(auraRange&&dist<auraRange)        doFire=true;
             else if(isRanged&&dist<CFG.fireDist) doFire=true;
-            else if(!isRanged&&dist<28)          doFire=true;
+            else if(!isRanged&&dist<28)        { doFire=true; meleeRetreatTimer=32; }
         }
 
         clr();
