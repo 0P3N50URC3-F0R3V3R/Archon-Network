@@ -68,19 +68,22 @@ setInterval(() => {
         if (room.createdAt < cutoff) { rooms.delete(id); console.log('[room] expired', id); }
 }, 5 * 60 * 1000);
 
-// ── index.html with fresh session ID ─────────────────────────────────────────
-app.get(['/', '/index.html'], (_req, res) => {
+// ── multiplayer.html with fresh session ID (SP doesn't need it) ──────────────
+function serveWithSid(file, req, res) {
     try {
-        let html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+        let html = fs.readFileSync(path.join(__dirname, file), 'utf8');
         const sid = crypto.randomBytes(16).toString('hex');
         html = html.replace(/data-sid="[^"]*"/, `data-sid="${sid}"`);
         res.setHeader('Content-Type', 'text/html; charset=utf-8');
         res.send(html);
     } catch (err) {
-        console.error('[index]', err.message);
+        console.error('[html]', err.message);
         res.status(500).send('Server error');
     }
-});
+}
+
+app.get(['/', '/index.html'], (_req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get(['/multiplayer.html', '/multiplayer'], (_req, res) => serveWithSid('multiplayer.html', _req, res));
 
 // ── Room management API ───────────────────────────────────────────────────────
 app.post('/api/room', (req, res) => {
