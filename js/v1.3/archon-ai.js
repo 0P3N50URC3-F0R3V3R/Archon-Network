@@ -365,6 +365,10 @@
 
         var origScan = engine.scanRoutine.bind(engine);
         engine.scanRoutine = function () {
+            // Skip "Local/Online" menu — already chose SP from landing page
+            if (game.scene === 'menu' && game.menuLevel === 1 && !engine.room) {
+                game.menuLevel = 2;
+            }
             origScan();
             if (game.scene === 'table' && game.actualSide === AI && !game.gameEnded) {
                 boardTick();
