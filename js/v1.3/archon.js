@@ -2667,7 +2667,7 @@ function ArchonOnline() {
         })
     }, this.initOnlineLink = function() {
         var e = getElement("onlineLink");
-        e.value = window.location.origin + "/#" + engine.room, show("onlineLink"), engine.enableKeys = !0, e.onmousedown = e.onmouseup = e.onclick = function(e) {
+        e.value = window.location.origin + "/multiplayer.html#" + engine.room, show("onlineLink"), engine.enableKeys = !0, e.onmousedown = e.onmouseup = e.onclick = function(e) {
             e.preventDefault(), e.stopPropagation(), this.blur(), this.focus(), this.select()
         }
     }, this.hideOnlineLink = function() {
